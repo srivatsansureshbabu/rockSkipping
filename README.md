@@ -20,3 +20,11 @@ We built it for fun as a light-hearted project to work on together.
 Make sure you have Python and [Ursina Engine](https://www.ursinaengine.org/) installed:
 ```bash
 pip install ursina
+```
+
+To start playing the game, run this in the command line:
+```
+python run.py
+```
+
+Enjoy!
