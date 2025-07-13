@@ -8,15 +8,16 @@ def initializeGround():
     model = "plane",
     texture = 'Background/sandTexture.jpg',
     collider = "mesh",
-    scale = (200,1,200)
+    scale = (2000,1,200)
     )
     water = Entity(
         model = "plane",
         texture = 'Background/waterTexture.jpg',
-        collider = "mesh",
-        scale = (200,1,200),
-        y = 0.01
+        collider = 'box',
+        scale = (2000,1,2000),
+        position = (0,0,1100),
     )
+    return [sand,water]
 
 
 
@@ -40,9 +41,11 @@ def initializeRock():
         texture=None,
         color=color.gray,
         scale=0.5,
-        position=original_pos
+        position=original_pos,
+        collider= 'box'
         # parent=player.children[0],  # the camera entity named "entity"
     )
+    
     return rock
 
     

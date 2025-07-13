@@ -9,7 +9,7 @@ flying = False
 rock_velocity = Vec3(0, 0, 0)
 gravity = Vec3(0, -9.8, 0)
 
-def update_rock(rock, player, camera, held_keys, time):
+def update_rock(rock, player, camera, water, held_keys, time):
     global flying, rock_velocity
 
     if held_keys['left mouse']:
@@ -19,7 +19,7 @@ def update_rock(rock, player, camera, held_keys, time):
             rock.world_position = camera.world_position + camera.forward * 1
             # rock.look_at(rock.world_position + camera.forward)
             rock.rotation_x = 90
-            rock_velocity = camera.forward * 500  # set initial throw velocity
+            rock_velocity = camera.forward * 250  # set initial throw velocity
             flying = True
         
         if flying:
@@ -27,7 +27,9 @@ def update_rock(rock, player, camera, held_keys, time):
             rock_velocity += gravity * time.dt
             rock.position += rock_velocity * time.dt
             rock.rotation_x = 90
-
+            if rock.intersects(water).hit:
+                print("Hit!")
+                rock_velocity.y = -rock_velocity.y
             # optional: stop if it hits ground
             # if rock.y <= 0:
             #     rock.y = 0
