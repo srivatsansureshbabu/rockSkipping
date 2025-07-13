@@ -1,8 +1,8 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from entities import *
-
 from ursina import *
+import time
 
 # state variables
 flying = False
@@ -12,12 +12,12 @@ gravity = Vec3(0, -9.8, 0)
 def update_rock(rock, player, camera, held_keys, time):
     global flying, rock_velocity
 
-    if held_keys['space']:
+    if held_keys['left mouse']:
         if not flying:
             # detach & start flying
             rock.parent = scene
             rock.world_position = camera.world_position + camera.forward * 1
-            rock.look_at(rock.world_position + camera.forward)
+            # rock.look_at(rock.world_position + camera.forward)
             rock.rotation_x = 90
             rock_velocity = camera.forward * 500  # set initial throw velocity
             flying = True
@@ -42,3 +42,13 @@ def update_rock(rock, player, camera, held_keys, time):
             rock.rotation_x = 90
             rock_velocity = Vec3(0,0,0)
             flying = False
+
+def jump(player,originalPos,held_keys):
+    jumpAmount = abs(player.y - originalPos)
+    if held_keys["space"]:
+        if jumpAmount <= 40:
+            player.y += 1
+    else:
+        if player.y >= originalPos:
+            player.y = player.y - 0.5
+    

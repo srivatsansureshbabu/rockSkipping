@@ -3,17 +3,29 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 from entities import *
 
 def initializeGround():
-    ground = Entity(
+    # Initializes sand
+    sand = Entity(
     model = "plane",
-    texture = "grass",
+    texture = 'Background/sandTexture.jpg',
     collider = "mesh",
     scale = (200,1,200)
     )
+    water = Entity(
+        model = "plane",
+        texture = 'Background/waterTexture.jpg',
+        collider = "mesh",
+        scale = (200,1,200),
+        y = 0.01
+    )
+
+
 
 def initializePlayer():
-    player = Entity(model='cube', color=color.azure, position=(0,0,0))
+    # player = Entity(model='cube', color=color.azure, position=(0,20,0))
     player = FirstPersonController()
+    player.y += 20
     destroy(player.cursor)
+
     player.speed = 100
     player.gravity = 0  # optional, so you don't fall through the plane
     return player
@@ -32,3 +44,5 @@ def initializeRock():
         # parent=player.children[0],  # the camera entity named "entity"
     )
     return rock
+
+    
