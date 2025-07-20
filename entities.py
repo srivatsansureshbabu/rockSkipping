@@ -47,5 +47,3 @@ def initializeRock():
     )
     
     return rock
-
-    
